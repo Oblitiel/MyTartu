@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">MyTartu</string>
+    <string name="hotels">Hoteles</string>
+    <string name="restaurants">Restaurantes</string>
+    <string name="parks">Parques</string>
+    <string name="malls">Centros Comerciales</string>
 </resources>
