@@ -103,7 +103,7 @@ fun TartuTopBar(){
         if (TartuViewModel.uiState.isShowingDetails == true){
             currentTitle = 1
         } else {
-            currentTitle = 2
+            currentTitle = 69
         }
     Text(
         text = "" + currentTitle
