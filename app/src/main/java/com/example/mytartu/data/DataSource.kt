@@ -1,9 +1,20 @@
 package com.example.mytartu.data
 
 import com.example.mytartu.R
+import com.example.mytartu.TartuScreen
 import com.example.mytartu.model.RecomendationItem
 
-object LocalRecomendationDataProvider {
+object DataSource {
+
+    val  defaultRecomendationItem = RecomendationItem(
+        id = 1,
+        imageResourceId = R.drawable.la_bochi,
+        name = R.string.hotels,
+        description = R.string.hotels,
+        details = R.string.hotels
+    )
+
+    val defaultScreen = TartuScreen.Hotel
 
     fun getHotels() : List<RecomendationItem>{
         return listOf(

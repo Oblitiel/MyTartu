@@ -24,7 +24,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.mytartu.data.LocalRecomendationDataProvider
+import com.example.mytartu.data.DataSource
 import com.example.mytartu.model.RecomendationItem
 import com.example.mytartu.ui.theme.MyTartuTheme
 
@@ -99,7 +99,7 @@ fun MenuList(
         verticalArrangement = Arrangement.spacedBy(16.dp),
         modifier = modifier.padding(top = 16.dp)
     ){
-        items(recomendations, key = { recomendation -> recomendation.id }) { recomendation ->
+        items(recomendations) { recomendation ->
             MenuListItem(
                 recomendation = recomendation,
                 onItemClick = onClick
@@ -125,7 +125,7 @@ fun MenuList(
 fun MenuListPreview(){
     MyTartuTheme{
         MenuList(
-            recomendations = LocalRecomendationDataProvider.getHotels(),
+            recomendations = DataSource.getHotels(),
             onClick = {}
         )
     }

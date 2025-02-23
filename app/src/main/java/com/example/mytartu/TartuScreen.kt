@@ -2,7 +2,6 @@
 
 package com.example.mytartu
 
-import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
@@ -15,21 +14,17 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.example.mytartu.data.LocalRecomendationDataProvider
+import com.example.mytartu.data.DataSource
 import com.example.mytartu.ui.BaseMenuScreen
 
 //TODO: Aqui van los enumerados de las rutas para el nav controler
 enum class TartuScreen(){
-    // Recomendaciones
-    HotelRecom,
-    RestaurantRecom,
-    ParkRecom,
-    MallRecom,
-    // Detalles de las recomendaciones
     Hotel,
     Restaurant,
     Park,
-    Mall
+    Mall,
+
+    Details
 }
 
 //TODO: Aqui va todo lo del nav controler y el scafold
@@ -41,7 +36,7 @@ fun TartuApp(){
     val backStackEntry by navController.currentBackStackEntryAsState()
     // Get the name of the current screen
     val currentScreen = TartuScreen.valueOf(
-        backStackEntry?.destination?.route ?: TartuScreen.HotelRecom.name
+        backStackEntry?.destination?.route ?: TartuScreen.Hotel.name
     )
     val viewModel: TartuViewModel = viewModel()
 
@@ -57,34 +52,19 @@ fun TartuApp(){
             startDestination = currentScreen,
             modifier = Modifier.padding(innerPadding)
         ) {
-            // Pantalla sugerencias de hoteles
-            composable(route = TartuScreen.HotelRecom.name) {
-                BaseMenuScreen(
-                    LocalRecomendationDataProvider.getHotels(),
-                    onClick = {
-                        //que vaya a la página de detalles de ese elemento
-                    }
-                )
-            }
-
-            // Pantalla sugerencias de restaurantes
-            composable(route = TartuScreen.RestaurantRecom.name) {
-
-            }
-
-            // Pantalla sugerencias de parques
-            composable(route = TartuScreen.ParkRecom.name) {
-
-            }
-
-            // Pantalla sugerencias de centros comerciales
-            composable(route = TartuScreen.MallRecom.name) {
+            // Pantalla Detalles
+            composable(route = TartuScreen.Details.name) {
 
             }
 
             // Pantallade hotel
             composable(route = TartuScreen.Hotel.name) {
-
+                BaseMenuScreen(
+                    options = DataSource.getHotels(),
+                    onClick = {
+                        //TODO: hacer esto
+                    }
+                )
             }
 
             // Pantalla de restaurante
