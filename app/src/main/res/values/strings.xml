@@ -21,8 +21,8 @@
 
     <!-- Detalles de Hoteles -->
     <string name="hotel_tartu_details">Es una opción ideal para quienes viajan por negocios o por placer, ya que está cerca de la estación de autobuses, el casco antiguo, el teatro Vanemuine y centros comerciales. Ofrece alojamiento relajante en el centro de Tartu.</string>
-    <string name="hotel_dorpat_details"></string>
-    <string name="hektor_design_hostel_details"></string>
-    <string name="hotell_soho_details"></string>
-    <string name="bob_w_duo_lofts_details"></string>
+    <string name="hotel_dorpat_details">Situado junto al rio Emajõgi, en pleno centro de la ciudad. Este hotel es conocido por su amplio centro de conferencias y spa, lo que lo hace adecuado tanto para viajeros de negocios como de ocio.</string>
+    <string name="hektor_design_hostel_details">Ofrece habitaciones privadas y compartidas, así como áreas comunes para socializar. Es una opción económica y popular entre los viajeros jóvenes y mochileros.</string>
+    <string name="hotell_soho_details">Ofrece habitaciones modernas y bien equipadas, así como un restaurante y bar. Es una opción ideal para quienes desean explorar el centro histórico de la ciudad.</string>
+    <string name="bob_w_duo_lofts_details">Es una excelente opción para estancias más largas o para quienes buscan más espacio y privacidad. Estos apartamentos suelen estar equipados con cocina y lavandería.</string>
 </resources>
