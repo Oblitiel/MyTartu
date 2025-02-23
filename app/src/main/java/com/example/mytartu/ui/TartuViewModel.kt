@@ -7,15 +7,24 @@ import com.example.mytartu.model.RecomendationItem
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 
 class TartuViewModel {
-    private val _uiState = MutableStateFlow(TartuUiState())
+    private val _uiState = MutableStateFlow(
+        TartuUiState()
+    )
     val uiState: StateFlow<TartuUiState> = _uiState.asStateFlow()
+
+    fun updateCurrentRecomendation(selectedRecomendation : RecomendationItem){
+        _uiState.update {
+            it.copy(currentRecomendation = selectedRecomendation)
+        }
+    }
 }
 
 
-class TartuUiState {
-    var currentRecomendation : RecomendationItem  = DataSource.defaultRecomendationItem
-    var currentSection : TartuScreen = DataSource.defaultScreen
+data class TartuUiState (
+    var currentRecomendation : RecomendationItem  = DataSource.defaultRecomendationItem,
+    var currentSection : TartuScreen = DataSource.defaultScreen,
     var isShowingDetails : Boolean = false
-}
+)
