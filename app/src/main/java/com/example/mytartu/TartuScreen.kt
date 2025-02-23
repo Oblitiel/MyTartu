@@ -97,7 +97,7 @@ fun TartuApp(){
 fun TartuTopBar(tartuViewModel: TartuViewModel){
     var currentTitle by remember { mutableIntStateOf(1) }
     val titleResult = when (currentTitle) {
-        1 -> tartuViewModel.uiState.
+        1 -> tartuViewModel.uiState.currentRecomendation
         else -> tartuViewModel.uiState.value.currentSection
     }
         if (tartuViewModel.uiState.value.isShowingDetails == true){
