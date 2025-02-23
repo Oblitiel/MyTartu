@@ -107,21 +107,18 @@ fun TartuApp(){
 
 //TODO: App´s Ttoppbbarr
 @Composable
-fun TartuTopBar(
-    uiState: TartuUiState
-){
+fun TartuTopBar(uiState: TartuUiState){
     var currentTitle by remember { mutableIntStateOf(1) }
     val titleResult = when (currentTitle) {
-        1 -> tartuViewModel.uiState.currentRecomendation
-        else -> tartuViewModel.uiState.value.currentSection
+        1 -> uiState.currentRecomendation
+        else -> uiState.currentSection
     }
-        if (tartuViewModel.uiState.value.isShowingDetails == true){
+        if (uiState.isShowingDetails == true){
             currentTitle = 1
         } else {
             currentTitle = 69
         }
     Text(
         text = "" + currentTitle
-
     )
 }
