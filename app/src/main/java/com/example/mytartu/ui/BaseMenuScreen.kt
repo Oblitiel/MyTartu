@@ -2,23 +2,28 @@
 package com.example.mytartu.ui
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.mytartu.R
+import androidx.compose.ui.unit.dp
 import com.example.mytartu.data.LocalRecomendationDataProvider
 import com.example.mytartu.model.RecomendationItem
 import com.example.mytartu.ui.theme.MyTartuTheme
@@ -46,22 +51,36 @@ fun MenuListItem(
         elevation = CardDefaults.cardElevation(),
         onClick = {onItemClick(recomendation)},
         modifier = modifier,
-        shape = RoundedCornerShape(dimensionResource(R.dimen.card_corner_radius))
+        shape = RoundedCornerShape(20.dp)
     ){
         Row(
             modifier = modifier.fillMaxWidth()
-                .size(dimensionResource(R.dimen.card_image_height))
+                .size(128.dp)
         ){
             Image(
                 painter = painterResource(recomendation.imageResourceId),
-                contentDescription = null
+                contentDescription = null,
+                modifier = Modifier.size(128.dp),
+                alignment = Alignment.Center,
+                contentScale = ContentScale.FillWidth
             )
-            Column {
+            Column (
+                modifier = Modifier
+                    .padding(
+                        vertical = 8.dp,
+                        horizontal = 16.dp
+                    )
+                    .weight(1f)
+            ){
                 Text(
-                    stringResource(recomendation.name)
+                    text = stringResource(recomendation.name),
+                    style = MaterialTheme.typography.titleMedium,
+                    modifier = Modifier.padding(4.dp)
                 )
                 Text(
-                    stringResource(recomendation.details)
+                    text = stringResource(recomendation.details),
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.secondary
                 )
             }
         }
@@ -72,10 +91,13 @@ fun MenuListItem(
 fun MenuList(
     recomendations: List<RecomendationItem>,
     onClick: (RecomendationItem) -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    contentPadding: PaddingValues = PaddingValues(0.dp),
 ){
     LazyColumn (
-        modifier = modifier
+        contentPadding = contentPadding,
+        verticalArrangement = Arrangement.spacedBy(16.dp),
+        modifier = modifier.padding(top = 16.dp)
     ){
         items(recomendations, key = { recomendation -> recomendation.id }) { recomendation ->
             MenuListItem(
