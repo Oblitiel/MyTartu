@@ -151,3 +151,4 @@ fun TartuBottomBar(navController: NavController) {
         Icon(Icons.Default.ShoppingCart, contentDescription = "Centros_comerciales")
     }
 }
+
