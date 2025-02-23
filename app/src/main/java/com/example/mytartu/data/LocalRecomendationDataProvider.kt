@@ -15,7 +15,7 @@ object LocalRecomendationDataProvider {
                 details = R.string.hotels
             ),
             RecomendationItem(
-                id = 1,
+                id = 5,
                 imageResourceId = R.drawable.la_bochi,
                 name = R.string.hotels,
                 description = R.string.hotels,

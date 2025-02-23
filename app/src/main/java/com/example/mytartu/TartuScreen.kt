@@ -15,6 +15,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.example.mytartu.data.LocalRecomendationDataProvider
+import com.example.mytartu.ui.BaseMenuScreen
 
 //TODO: Aqui van los enumerados de las rutas para el nav controler
 enum class TartuScreen(){
@@ -57,7 +59,12 @@ fun TartuApp(){
         ) {
             // Pantalla sugerencias de hoteles
             composable(route = TartuScreen.HotelRecom.name) {
-
+                BaseMenuScreen(
+                    LocalRecomendationDataProvider.getHotels(),
+                    onClick = {
+                        //que vaya a la página de detalles de ese elemento
+                    }
+                )
             }
 
             // Pantalla sugerencias de restaurantes
