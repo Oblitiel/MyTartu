@@ -17,4 +17,5 @@ class TartuViewModel {
 class TartuUiState {
     var currentRecomendation : RecomendationItem  = DataSource.defaultRecomendationItem
     var currentSection : TartuScreen = DataSource.defaultScreen
+    var isShowingDetails : Boolean = false
 }
