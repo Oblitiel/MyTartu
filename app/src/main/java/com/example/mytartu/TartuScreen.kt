@@ -4,6 +4,7 @@ package com.example.mytartu
 
 
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -42,17 +43,23 @@ fun TartuApp(){
     // Get current back stack entry
     val backStackEntry by navController.currentBackStackEntryAsState()
     // Get the name of the current screen
-    val currentScreen = TartuScreen.valueOf(
-        backStackEntry?.destination?.route ?: TartuScreen.Hotel.name
-    )
-    val viewModel: TartuViewModel = viewModel()
+//    val currentScreen = TartuScreen.valueOf(
+//        backStackEntry?.destination?.route ?: TartuScreen.Hotel.name
+//    )
+    val currentScreen = TartuScreen.Hotel.name
+
+    val viewModel: TartuViewModel = TartuViewModel()
+
+    val uiState by viewModel.uiState.collectAsState()
 
     Scaffold(
         topBar = {
-            TartuTopBar()
+            TartuTopBar(
+                uiState
+            )
         }
     ) { innerPadding ->
-        val uiState by viewModel.uiState.collectAsState()
+
 
         NavHost(
             navController = navController,
@@ -67,16 +74,22 @@ fun TartuApp(){
             // Pantallade hotel
             composable(route = TartuScreen.Hotel.name) {
                 BaseMenuScreen(
+                    viewModel = viewModel,
                     options = DataSource.getHotels(),
-                    onClick = {
-                        //TODO: hacer esto
-                    }
                 )
+                Button(
+                    onClick = {navController.navigate(TartuScreen.Restaurant.name)}
+                ) {
+                    Text("Prueba")
+                }
             }
 
             // Pantalla de restaurante
             composable(route = TartuScreen.Restaurant.name) {
-
+                BaseMenuScreen(
+                    viewModel = viewModel,
+                    options = DataSource.getRestaurants(),
+                )
             }
 
             // Pantalla de parque
@@ -94,7 +107,9 @@ fun TartuApp(){
 
 //TODO: App´s Ttoppbbarr
 @Composable
-fun TartuTopBar(tartuViewModel: TartuViewModel){
+fun TartuTopBar(
+    uiState: TartuUiState
+){
     var currentTitle by remember { mutableIntStateOf(1) }
     val titleResult = when (currentTitle) {
         1 -> tartuViewModel.uiState.currentRecomendation

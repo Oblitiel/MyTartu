@@ -4,4 +4,25 @@
     <string name="restaurants">Restaurantes</string>
     <string name="parks">Parques</string>
     <string name="malls">Centros Comerciales</string>
+
+    <!-- Hoteles -->
+    <string name="hotel_tartu">Hotel Tartu</string>
+    <string name="hotel_dorpat">Hotel Dorpat</string>
+    <string name="hektor_design_hostel">Hektor Design Hostel</string>
+    <string name="hotell_soho">Hotell SOHO</string>
+    <string name="bob_w_duo_lofts">Bob W Duo Lofts</string>
+
+    <!-- Descripdion de Hoteles -->
+    <string name="hotel_tartu_desc">Este hotel es uno de los más antiguos de Tartu, con una ubicación muy céntrica.</string>
+    <string name="hotel_dorpat_desc">Un hotel de 3 estrellas moderno y confortable.</string>
+    <string name="hektor_design_hostel_desc">Un albergue de diseño con un ambiente moderno y juvenil.</string>
+    <string name="hotell_soho_desc">Un hotel elegante situado en el corazón del casco antiguo de Tartu.</string>
+    <string name="bob_w_duo_lofts_desc">Ofrece apartamentos tipo loft con diseño moderno y comodidades hogareñas.</string>
+
+    <!-- Detalles de Hoteles -->
+    <string name="hotel_tartu_details">Es una opción ideal para quienes viajan por negocios o por placer, ya que está cerca de la estación de autobuses, el casco antiguo, el teatro Vanemuine y centros comerciales. Ofrece alojamiento relajante en el centro de Tartu.</string>
+    <string name="hotel_dorpat_details"></string>
+    <string name="hektor_design_hostel_details"></string>
+    <string name="hotell_soho_details"></string>
+    <string name="bob_w_duo_lofts_details"></string>
 </resources>
