@@ -19,6 +19,8 @@ class TartuViewModel {
         _uiState.update {
             it.copy(currentRecomendation = selectedRecomendation)
         }
+        updateCurrentSection(TartuScreen.Details)
+        showDetails(true)
     }
 
     fun showDetails(show : Boolean = true){
@@ -29,8 +31,12 @@ class TartuViewModel {
 
     fun updateCurrentSection(selectedSection : TartuScreen){
         _uiState.update {
-            it.copy(currentSection = selectedSection)
+            it.copy(
+                prepSection = it.currentSection,
+                currentSection = selectedSection
+            )
         }
+        showDetails(false)
     }
 }
 
@@ -38,5 +44,6 @@ class TartuViewModel {
 data class TartuUiState (
     var currentRecomendation : RecomendationItem  = DataSource.defaultRecomendationItem,
     var currentSection : TartuScreen = DataSource.defaultScreen,
+    var prepSection: TartuScreen = DataSource.defaultScreen,
     var isShowingDetails : Boolean = false
 )

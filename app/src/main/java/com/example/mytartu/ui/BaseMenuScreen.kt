@@ -23,26 +23,21 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.mytartu.R
-import com.example.mytartu.data.DataSource
 import com.example.mytartu.model.RecomendationItem
-import com.example.mytartu.ui.theme.MyTartuTheme
 
 //TODO: esto es la apariencia basica de los menus de las apps
 @Composable
 fun BaseMenuScreen(
     viewModel: TartuViewModel,
     options: List<RecomendationItem>,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onItemClick: (RecomendationItem) -> Unit
 ){
     MenuList(
         recomendations = options,
-        onClick = {recomendation ->
-            viewModel.updateCurrentRecomendation(recomendation)
-        },
+        onClick = onItemClick,
         modifier = modifier
     )
 

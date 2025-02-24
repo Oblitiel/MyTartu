@@ -7,9 +7,12 @@ import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Face
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
@@ -36,11 +39,12 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.mytartu.data.DataSource
+import com.example.mytartu.model.RecomendationItem
 import com.example.mytartu.ui.BaseMenuScreen
+import com.example.mytartu.ui.RecomendationScreen
 import com.example.mytartu.ui.TartuUiState
 import com.example.mytartu.ui.TartuViewModel
 
-//TODO: Aqui van los enumerados de las rutas para el nav controler
 enum class TartuScreen(@StringRes val tittle: Int) {
     Hotel(R.string.hotels),
     Restaurant(R.string.restaurants),
@@ -50,33 +54,41 @@ enum class TartuScreen(@StringRes val tittle: Int) {
     Details(R.string.details)
 }
 
-//TODO: Aqui va todo lo del nav controler y el scafold
 @Composable
 fun TartuApp(
     modifier: Modifier = Modifier
 ) {
 
     val navController = rememberNavController()
-//    val backStackEntry by navController.currentBackStackEntryAsState()
     val currentScreen = DataSource.defaultScreen.name
 
-    val viewModel: TartuViewModel = TartuViewModel()
+    val viewModel = TartuViewModel()
     val uiState by viewModel.uiState.collectAsState()
+
+    val onItemClick : (RecomendationItem) -> Unit= {recomendation ->
+        viewModel.updateCurrentRecomendation(recomendation)
+        navController.navigate(TartuScreen.Details.name)
+    }
 
     Scaffold(
         topBar = {
             TartuTopBar(
-                uiState
+                uiState = uiState,
+                onBackClick = {
+                    navController.navigate(uiState.prepSection.name)
+                    viewModel.updateCurrentSection(uiState.prepSection)
+                }
             )
         },
         bottomBar = {
-            TartuBottomBar(
+            TartuNavigationBar(
                 onClick = { screen: TartuScreen ->
                     navController.navigate(screen.name)
                     viewModel.updateCurrentSection(screen)
                 }
             )
-        }
+        },
+        modifier = modifier
     ) { innerPadding ->
 
 
@@ -87,7 +99,7 @@ fun TartuApp(
         ) {
             // Pantalla Detalles
             composable(route = TartuScreen.Details.name) {
-
+                RecomendationScreen()
             }
 
             // Pantalla de hotel
@@ -95,6 +107,7 @@ fun TartuApp(
                 BaseMenuScreen(
                     viewModel = viewModel,
                     options = DataSource.getHotels(),
+                    onItemClick = onItemClick
                 )
             }
 
@@ -103,6 +116,7 @@ fun TartuApp(
                 BaseMenuScreen(
                     viewModel = viewModel,
                     options = DataSource.getRestaurants(),
+                    onItemClick = onItemClick
                 )
             }
 
@@ -111,6 +125,7 @@ fun TartuApp(
                 BaseMenuScreen(
                     viewModel = viewModel,
                     options = DataSource.getParks(),
+                    onItemClick = onItemClick
                 )
             }
 
@@ -119,27 +134,41 @@ fun TartuApp(
                 BaseMenuScreen(
                     viewModel = viewModel,
                     options = DataSource.getShoppingMalls(),
+                    onItemClick = onItemClick
                 )
             }
         }
     }
 }
 
-//TODO: App´s Ttoppbbarr
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TartuTopBar(uiState: TartuUiState) {
+fun TartuTopBar(
+    uiState: TartuUiState,
+    onBackClick : () -> Unit,
+    modifier: Modifier = Modifier
+) {
 
     CenterAlignedTopAppBar(
-        modifier = Modifier,
+        modifier = modifier,
         colors = topAppBarColors(
             containerColor = MaterialTheme.colorScheme.secondaryContainer,
             //titleContentColor = Color.White,
         ),
         title = {
             Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically,
             ) {
+                if (uiState.isShowingDetails){
+                    IconButton(onClick = onBackClick) {
+                        Icon(
+                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                            contentDescription = null
+                        )
+                    }
+                }
                 Image(
                     painter = painterResource(R.drawable.tartu_icon),
                     contentDescription = null,
@@ -160,13 +189,16 @@ fun TartuTopBar(uiState: TartuUiState) {
     )
 }
 
-//TODO: App´s BbottommBarr
 @Composable
-fun TartuBottomBar(
-    onClick: (TartuScreen) -> Unit
+fun TartuNavigationBar(
+    onClick: (TartuScreen) -> Unit,
+    modifier: Modifier = Modifier
 ) {
-    NavigationBar {
+    NavigationBar (
+        modifier = modifier.fillMaxWidth()
+    ){
         Row(
+            modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceAround
         ) {
             IconButton(
@@ -196,16 +228,17 @@ fun TartuBottomBar(
     }
 }
 
+//TODO QUITAR ESTO
 @Preview
 @Composable
 fun TopBarPreviewAlt() {
-    val viewModel: TartuViewModel = TartuViewModel()
+    val viewModel = TartuViewModel()
     val uiState by viewModel.uiState.collectAsState()
 
     viewModel.showDetails(true)
     viewModel.updateCurrentSection(TartuScreen.Details)
 
-    TartuTopBar(uiState)
+    TartuTopBar(uiState,{})
 }
 
 @Preview
