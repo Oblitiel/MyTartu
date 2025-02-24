@@ -114,26 +114,3 @@ fun MenuList(
         }
     }
 }
-
-//@Preview
-//@Composable
-//fun MenuItemPreview(){
-//    MyTartuTheme {
-//        MenuItem(
-//            recomendation = LocalRecomendationDataProvider.getHotels()[0],
-//            onItemClick = {}
-//        )
-//    }
-//
-//}
-
-@Preview
-@Composable
-fun MenuListPreview(){
-    MyTartuTheme{
-        BaseMenuScreen(
-            viewModel = TartuViewModel(),
-            options = DataSource.getHotels()
-        )
-    }
-}

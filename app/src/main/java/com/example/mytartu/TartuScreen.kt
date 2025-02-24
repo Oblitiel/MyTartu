@@ -14,7 +14,6 @@ import androidx.compose.material.icons.filled.Face
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.ShoppingCart
-import androidx.compose.material3.Button
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -23,36 +22,26 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults.topAppBarColors
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import com.example.mytartu.ui.TartuViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.mytartu.data.DataSource
 import com.example.mytartu.ui.BaseMenuScreen
 import com.example.mytartu.ui.TartuUiState
+import com.example.mytartu.ui.TartuViewModel
 
 //TODO: Aqui van los enumerados de las rutas para el nav controler
-enum class TartuScreen(@StringRes val tittle : Int){
+enum class TartuScreen(@StringRes val tittle: Int) {
     Hotel(R.string.hotels),
     Restaurant(R.string.restaurants),
     Park(R.string.parks),
@@ -65,7 +54,7 @@ enum class TartuScreen(@StringRes val tittle : Int){
 @Composable
 fun TartuApp(
     modifier: Modifier = Modifier
-){
+) {
 
     val navController = rememberNavController()
 //    val backStackEntry by navController.currentBackStackEntryAsState()
@@ -82,8 +71,7 @@ fun TartuApp(
         },
         bottomBar = {
             TartuBottomBar(
-                navController = navController,
-                onClick = {screen : TartuScreen ->
+                onClick = { screen: TartuScreen ->
                     navController.navigate(screen.name)
                     viewModel.updateCurrentSection(screen)
                 }
@@ -120,12 +108,18 @@ fun TartuApp(
 
             // Pantalla de parque
             composable(route = TartuScreen.Park.name) {
-
+                BaseMenuScreen(
+                    viewModel = viewModel,
+                    options = DataSource.getParks(),
+                )
             }
 
             // Pantalla de centro comercial
             composable(route = TartuScreen.Mall.name) {
-
+                BaseMenuScreen(
+                    viewModel = viewModel,
+                    options = DataSource.getShoppingMalls(),
+                )
             }
         }
     }
@@ -134,7 +128,7 @@ fun TartuApp(
 //TODO: App´s Ttoppbbarr
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TartuTopBar(uiState: TartuUiState){
+fun TartuTopBar(uiState: TartuUiState) {
 
     CenterAlignedTopAppBar(
         modifier = Modifier,
@@ -144,7 +138,7 @@ fun TartuTopBar(uiState: TartuUiState){
         ),
         title = {
             Row(
-                verticalAlignment = Alignment.CenterVertically
+                verticalAlignment = Alignment.CenterVertically,
             ) {
                 Image(
                     painter = painterResource(R.drawable.tartu_icon),
@@ -153,7 +147,10 @@ fun TartuTopBar(uiState: TartuUiState){
                 )
                 Text(
                     text = if (uiState.isShowingDetails) {
-                        stringResource(uiState.currentSection.tittle, stringResource(uiState.currentRecomendation.name))
+                        stringResource(
+                            uiState.currentSection.tittle,
+                            stringResource(uiState.currentRecomendation.name)
+                        )
                     } else {
                         stringResource(uiState.currentSection.tittle)
                     }
@@ -166,35 +163,34 @@ fun TartuTopBar(uiState: TartuUiState){
 //TODO: App´s BbottommBarr
 @Composable
 fun TartuBottomBar(
-        navController: NavController,
-        onClick: (TartuScreen) -> Unit
-    ) {
-    val items = listOf("Inicio", "Buscar", "Favoritos", "Perfil")
-    val icons = listOf(Icons.Default.Home, Icons.Default.Face, Icons.Default.Favorite, Icons.Default.ShoppingCart)
-
+    onClick: (TartuScreen) -> Unit
+) {
     NavigationBar {
-        Row (
+        Row(
             horizontalArrangement = Arrangement.SpaceAround
-        ){
+        ) {
             IconButton(
-                onClick = {onClick(TartuScreen.Hotel)}
+                onClick = { onClick(TartuScreen.Hotel) }
             ) {
                 Icon(Icons.Default.Home, contentDescription = stringResource(R.string.hotels))
             }
             IconButton(
-                onClick = {onClick(TartuScreen.Restaurant)}
+                onClick = { onClick(TartuScreen.Restaurant) }
             ) {
                 Icon(Icons.Default.Face, contentDescription = stringResource(R.string.restaurants))
             }
             IconButton(
-                onClick = {onClick(TartuScreen.Park)}
+                onClick = { onClick(TartuScreen.Park) }
             ) {
                 Icon(Icons.Default.Favorite, contentDescription = stringResource(R.string.parks))
             }
             IconButton(
-                onClick = {onClick(TartuScreen.Mall)}
+                onClick = { onClick(TartuScreen.Mall) }
             ) {
-                Icon(Icons.Default.ShoppingCart, contentDescription = stringResource(R.string.malls))
+                Icon(
+                    Icons.Default.ShoppingCart,
+                    contentDescription = stringResource(R.string.malls)
+                )
             }
         }
     }
@@ -202,7 +198,7 @@ fun TartuBottomBar(
 
 @Preview
 @Composable
-fun TopBarPreviewAlt(){
+fun TopBarPreviewAlt() {
     val viewModel: TartuViewModel = TartuViewModel()
     val uiState by viewModel.uiState.collectAsState()
 
@@ -214,6 +210,6 @@ fun TopBarPreviewAlt(){
 
 @Preview
 @Composable
-fun GeneralPreview(){
+fun GeneralPreview() {
     TartuApp()
 }

@@ -31,7 +31,7 @@
     <!-- Restaurantes -->
     <string name="restoran_aparaat">Restoran Aparaat</string>
     <string name="gunpowder_cellar">Gunpowder Cellar of Tartu</string>
-    <string name="restaurant_munchen">Restaurant München - Weihenstephaner Wirtshaus</string>
+    <string name="restaurant_munchen">München</string>
     <string name="humal_bistro">Humal BISTRO</string>
     <string name="la_dolce_vita">La Dolce Vita</string>
 
@@ -48,4 +48,46 @@
     <string name="restaurant_munchen_details">Sirve platos clásicos alemanes como salchichas y codillo, con una amplia selección de cervezas Weihenstephaner, en un ambiente festivo y animado.</string>
     <string name="humal_bistro_details">Menú de temporada con ingredientes locales, vinos y cervezas artesanales, en un ambiente informal y relajado.</string>
     <string name="la_dolce_vita_details">Platos clásicos italianos como pasta y pizza, con vinos italianos, en un ambiente romántico y sofisticado.</string>
+
+    <!-- Parques -->
+    <string name="parque_toomemagi">Parque Toomemägi</string>
+    <string name="parque_raadi">Parque Raadi</string>
+    <string name="jardin_botanico_tartu">Jardín Botánico de Tartu</string>
+    <string name="parque_emajogi">Ribera del río Emajõgi</string>
+    <string name="parque_laululava">Tartu Laululava</string>
+
+    <!-- Descripcion de Parques-->
+    <string name="parque_toomemagi_desc">Colina histórica con ruinas y vistas.</string>
+    <string name="parque_raadi_desc">Gran parque moderno en un antiguo aeródromo.</string>
+    <string name="jardin_botanico_tartu_desc">Jardín con plantas de todo el mundo.</string>
+    <string name="parque_emajogi_desc">Paseo junto al río con vistas.</string>
+    <string name="parque_laululava_desc">Parque con escenario y vistas panorámicas.</string>
+
+    <!-- Detalles de Parques-->
+    <string name="parque_toomemagi_details">Toomemägi, el corazón histórico de Tartu, ofrece vistas de la ciudad y alberga ruinas antiguas y monumentos universitarios. Es un espacio perfecto para pasear y sentir la historia de la ciudad.</string>
+    <string name="parque_raadi_details">Raadi es un parque extenso que transformó un aeródromo militar en un área verde con senderos y espacios abiertos. El Museo Nacional de Estonia está aquí, mezclando naturaleza y cultura.</string>
+    <string name="jardin_botanico_tartu_details">Este jardín ofrece una gran variedad de plantas en invernaderos y jardines temáticos. Es un lugar de paz para amantes de la naturaleza y quienes buscan tranquilidad.</string>
+    <string name="parque_emajogi_details">Este parque lineal sigue el río Emajõgi, con bancos y vistas fluviales. Es un lugar ideal para paseos relajantes y disfrutar del paisaje del río y la ciudad.</string>
+    <string name="parque_laululava_details">Conocido por eventos musicales, también es un parque con áreas verdes y vistas del río. Es un lugar popular para pasear y disfrutar de la naturaleza, especialmente durante festivales.</string>
+
+    <!-- Centros comerciales -->
+    <string name="lounakeskus">Lõunakeskus</string>
+    <string name="tasku_centre">Tasku Centre</string>
+    <string name="kvartal">Kvartal</string>
+    <string name="eeden">Eeden</string>
+    <string name="tartu_kaubamaja">Tartu Kaubamaja</string>
+
+    <!-- Descripcion Centros comerciales -->
+    <string name="lounakeskus_desc">Gigante del comercio y el ocio en Tartu.</string>
+    <string name="tasku_centre_desc">Corazón de la moda y la vida urbana en Tartu.</string>
+    <string name="kvartal_desc">Elegancia y modernidad en el centro de Tartu.</string>
+    <string name="eeden_desc">Compras prácticas y convenientes para el día a día.</string>
+    <string name="tartu_kaubamaja_desc">Un clásico de las compras en Tartu, con una larga tradición.</string>
+
+    <!-- Detalles Centros comerciales -->
+    <string name="lounakeskus_details">Lõunakeskus es un complejo extenso que ofrece una amplia gama de opciones de compras, desde moda y electrónica hasta artículos para el hogar, y un destino de ocio completo, con un cine multicines, una pista de hielo y una gran variedad de restaurantes y cafeterías.</string>
+    <string name="tasku_centre_details">Situado en el centro de Tartu, Tasku Centre ofrece una selección de boutiques de moda, tiendas de diseño y marcas populares, así como restaurantes y cafeterías con terrazas al aire libre, creando un ambiente urbano agradable.</string>
+    <string name="kvartal_details">Kvartal es conocido por su arquitectura moderna y su ambiente sofisticado, ofreciendo una selección de boutiques de moda de alta gama, restaurantes gourmet y bares de diseño, además de eventos y exposiciones de arte.</string>
+    <string name="eeden_details">Eeden es un centro comercial de barrio que atiende a las necesidades diarias con un supermercado grande, tiendas de ropa, farmacias y otros servicios esenciales, facilitando las compras rápidas y la obtención de artículos necesarios.</string>
+    <string name="tartu_kaubamaja_details">Tartu Kaubamaja es un centro comercial histórico con una variedad de tiendas departamentales que ofrecen ropa, cosméticos y artículos para el hogar, junto con restaurantes y cafeterías, combinando tradición y modernidad.</string>
 </resources>

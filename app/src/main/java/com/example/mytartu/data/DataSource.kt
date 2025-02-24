@@ -101,22 +101,78 @@ object DataSource {
     fun getParks() : List<RecomendationItem>{
         return listOf(
             RecomendationItem(
-                id = 3,
-                imageResourceId = R.drawable.la_bochi,
-                name = R.string.parks,
-                description = R.string.parks,
-                details = R.string.parks
+                id = 11,
+                imageResourceId = R.drawable.toomemagi_park,
+                name = R.string.parque_toomemagi,
+                description = R.string.parque_toomemagi_desc,
+                details = R.string.parque_toomemagi_details
+            ),
+            RecomendationItem(
+                id = 12,
+                imageResourceId = R.drawable.raadi_park,
+                name = R.string.parque_raadi,
+                description = R.string.parque_raadi_desc,
+                details = R.string.parque_raadi_details
+            ),
+            RecomendationItem(
+                id = 13,
+                imageResourceId = R.drawable.botanical_garden,
+                name = R.string.jardin_botanico_tartu,
+                description = R.string.jardin_botanico_tartu_desc,
+                details = R.string.jardin_botanico_tartu_details
+            ),
+            RecomendationItem(
+                id = 14,
+                imageResourceId = R.drawable.emajogi_riverbank,
+                name = R.string.parque_emajogi,
+                description = R.string.parque_emajogi_desc,
+                details = R.string.parque_emajogi_details
+            ),
+            RecomendationItem(
+                id = 15,
+                imageResourceId = R.drawable.laululava_park,
+                name = R.string.parque_laululava,
+                description = R.string.parque_laululava_desc,
+                details = R.string.parque_laululava_details
             )
         )
     }
     fun getShoppingMalls() : List<RecomendationItem>{
         return listOf(
             RecomendationItem(
-                id = 4,
-                imageResourceId = R.drawable.la_bochi,
-                name = R.string.malls,
-                description = R.string.malls,
-                details = R.string.malls
+                id = 16,
+                imageResourceId = R.drawable.lounakeskus,
+                name = R.string.lounakeskus,
+                description = R.string.lounakeskus_desc,
+                details = R.string.lounakeskus_details
+            ),
+            RecomendationItem(
+                id = 17,
+                imageResourceId = R.drawable.tasku_centre,
+                name = R.string.tasku_centre,
+                description = R.string.tasku_centre_desc,
+                details = R.string.tasku_centre_details
+            ),
+            RecomendationItem(
+                id = 18,
+                imageResourceId = R.drawable.kvartal,
+                name = R.string.kvartal,
+                description = R.string.kvartal_desc,
+                details = R.string.kvartal_details
+            ),
+            RecomendationItem(
+                id = 19,
+                imageResourceId = R.drawable.eeden,
+                name = R.string.eeden,
+                description = R.string.eeden_desc,
+                details = R.string.eeden_details
+            ),
+            RecomendationItem(
+                id = 20,
+                imageResourceId = R.drawable.tartu_kaubamaja,
+                name = R.string.tartu_kaubamaja,
+                description = R.string.tartu_kaubamaja_desc,
+                details = R.string.tartu_kaubamaja_details
             )
         )
     }
