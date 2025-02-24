@@ -132,6 +132,7 @@ fun TartuTopBar(uiState: TartuUiState){
     )
 }
 
+//TODO: App´s BbottommBarr
 @Composable
 fun TartuBottomBar(navController: NavController) {
     val items = listOf("Inicio", "Buscar", "Favoritos", "Perfil")
@@ -151,4 +152,3 @@ fun TartuBottomBar(navController: NavController) {
         Icon(Icons.Default.ShoppingCart, contentDescription = "Centros_comerciales")
     }
 }
-
