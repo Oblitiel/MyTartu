@@ -10,10 +10,15 @@ import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.Button
+import androidx.compose.material3.CenterAlignedTopAppBar
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults.topAppBarColors
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -22,6 +27,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.mytartu.ui.TartuViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -115,21 +121,34 @@ fun TartuApp(){
 }
 
 //TODO: App´s Ttoppbbarr
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TartuTopBar(uiState: TartuUiState){
-    var currentTitle by remember { mutableIntStateOf(1) }
-    val titleResult = when (currentTitle) {
-        1 -> uiState.currentRecomendation
-        else -> uiState.currentSection
-    }
-        if (uiState.isShowingDetails == true){
-            currentTitle = 1
-        } else {
-            currentTitle = 69
+
+    CenterAlignedTopAppBar(
+        modifier = Modifier,
+        colors = topAppBarColors(
+            containerColor = MaterialTheme.colorScheme.secondaryContainer,
+            titleContentColor = Color.White,
+        ),
+        title = {
+            Text(
+                text = if (uiState.isShowingDetails) {
+                    uiState.currentRecomendation.name.toString()
+                } else {
+                    uiState.currentSection.name
+                }
+            )
         }
-    Text(
-        text = "" + currentTitle
     )
+}
+
+@Preview
+@Composable
+fun previewTopbar(){
+
+    val uiState by TartuViewModel().uiState.collectAsState()
+    TartuTopBar(uiState)
 }
 
 //TODO: App´s BbottommBarr
