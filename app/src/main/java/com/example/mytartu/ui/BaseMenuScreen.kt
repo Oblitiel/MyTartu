@@ -29,7 +29,6 @@ import com.example.mytartu.model.RecomendationItem
 
 @Composable
 fun BaseMenuScreen(
-    viewModel: TartuViewModel,
     options: List<RecomendationItem>,
     modifier: Modifier = Modifier,
     onItemClick: (RecomendationItem) -> Unit

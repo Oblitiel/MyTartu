@@ -107,7 +107,6 @@ fun TartuApp(
             // Pantalla de hotel
             composable(route = TartuScreen.Hotel.name) {
                 BaseMenuScreen(
-                    viewModel = viewModel,
                     options = DataSource.getHotels(),
                     onItemClick = onItemClick
                 )
@@ -116,7 +115,6 @@ fun TartuApp(
             // Pantalla de restaurante
             composable(route = TartuScreen.Restaurant.name) {
                 BaseMenuScreen(
-                    viewModel = viewModel,
                     options = DataSource.getRestaurants(),
                     onItemClick = onItemClick
                 )
@@ -125,7 +123,6 @@ fun TartuApp(
             // Pantalla de parque
             composable(route = TartuScreen.Park.name) {
                 BaseMenuScreen(
-                    viewModel = viewModel,
                     options = DataSource.getParks(),
                     onItemClick = onItemClick
                 )
@@ -134,7 +131,6 @@ fun TartuApp(
             // Pantalla de centro comercial
             composable(route = TartuScreen.Mall.name) {
                 BaseMenuScreen(
-                    viewModel = viewModel,
                     options = DataSource.getShoppingMalls(),
                     onItemClick = onItemClick
                 )
