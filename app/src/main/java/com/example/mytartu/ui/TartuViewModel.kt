@@ -20,6 +20,18 @@ class TartuViewModel {
             it.copy(currentRecomendation = selectedRecomendation)
         }
     }
+
+    fun showDetails(show : Boolean = true){
+        _uiState.update {
+            it.copy(isShowingDetails = show)
+        }
+    }
+
+    fun updateCurrentSection(selectedSection : TartuScreen){
+        _uiState.update {
+            it.copy(currentSection = selectedSection)
+        }
+    }
 }
 
 

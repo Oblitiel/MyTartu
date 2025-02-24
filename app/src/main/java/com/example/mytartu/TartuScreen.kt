@@ -3,7 +3,12 @@
 package com.example.mytartu
 
 
+import androidx.annotation.StringRes
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Face
 import androidx.compose.material.icons.filled.Favorite
@@ -15,6 +20,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -26,9 +32,14 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.example.mytartu.ui.TartuViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
@@ -41,36 +52,41 @@ import com.example.mytartu.ui.BaseMenuScreen
 import com.example.mytartu.ui.TartuUiState
 
 //TODO: Aqui van los enumerados de las rutas para el nav controler
-enum class TartuScreen(){
-    Hotel,
-    Restaurant,
-    Park,
-    Mall,
+enum class TartuScreen(@StringRes val tittle : Int){
+    Hotel(R.string.hotels),
+    Restaurant(R.string.restaurants),
+    Park(R.string.parks),
+    Mall(R.string.malls),
 
-    Details
+    Details(R.string.details)
 }
 
 //TODO: Aqui va todo lo del nav controler y el scafold
 @Composable
-fun TartuApp(){
+fun TartuApp(
+    modifier: Modifier = Modifier
+){
 
     val navController = rememberNavController()
-    // Get current back stack entry
-    val backStackEntry by navController.currentBackStackEntryAsState()
-    // Get the name of the current screen
-//    val currentScreen = TartuScreen.valueOf(
-//        backStackEntry?.destination?.route ?: TartuScreen.Hotel.name
-//    )
-    val currentScreen = TartuScreen.Hotel.name
+//    val backStackEntry by navController.currentBackStackEntryAsState()
+    val currentScreen = DataSource.defaultScreen.name
 
     val viewModel: TartuViewModel = TartuViewModel()
-
     val uiState by viewModel.uiState.collectAsState()
 
     Scaffold(
         topBar = {
             TartuTopBar(
                 uiState
+            )
+        },
+        bottomBar = {
+            TartuBottomBar(
+                navController = navController,
+                onClick = {screen : TartuScreen ->
+                    navController.navigate(screen.name)
+                    viewModel.updateCurrentSection(screen)
+                }
             )
         }
     ) { innerPadding ->
@@ -92,11 +108,6 @@ fun TartuApp(){
                     viewModel = viewModel,
                     options = DataSource.getHotels(),
                 )
-                Button(
-                    onClick = {navController.navigate(TartuScreen.Restaurant.name)}
-                ) {
-                    Text("Prueba")
-                }
             }
 
             // Pantalla de restaurante
@@ -129,45 +140,80 @@ fun TartuTopBar(uiState: TartuUiState){
         modifier = Modifier,
         colors = topAppBarColors(
             containerColor = MaterialTheme.colorScheme.secondaryContainer,
-            titleContentColor = Color.White,
+            //titleContentColor = Color.White,
         ),
         title = {
-            Text(
-                text = if (uiState.isShowingDetails) {
-                    uiState.currentRecomendation.name.toString()
-                } else {
-                    uiState.currentSection.name
-                }
-            )
+            Row(
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Image(
+                    painter = painterResource(R.drawable.tartu_icon),
+                    contentDescription = null,
+                    modifier = Modifier.size(dimensionResource(R.dimen.icon_size))
+                )
+                Text(
+                    text = if (uiState.isShowingDetails) {
+                        stringResource(uiState.currentSection.tittle, stringResource(uiState.currentRecomendation.name))
+                    } else {
+                        stringResource(uiState.currentSection.tittle)
+                    }
+                )
+            }
         }
     )
 }
 
-@Preview
-@Composable
-fun previewTopbar(){
-
-    val uiState by TartuViewModel().uiState.collectAsState()
-    TartuTopBar(uiState)
-}
-
 //TODO: App´s BbottommBarr
 @Composable
-fun TartuBottomBar(navController: NavController) {
+fun TartuBottomBar(
+        navController: NavController,
+        onClick: (TartuScreen) -> Unit
+    ) {
     val items = listOf("Inicio", "Buscar", "Favoritos", "Perfil")
     val icons = listOf(Icons.Default.Home, Icons.Default.Face, Icons.Default.Favorite, Icons.Default.ShoppingCart)
 
-    IconButton(
-        onClick = {navController.navigate(TartuScreen.Hotel.name)}) {
-        Icon(Icons.Default.Home, contentDescription = "Hoteles")
+    NavigationBar {
+        Row (
+            horizontalArrangement = Arrangement.SpaceAround
+        ){
+            IconButton(
+                onClick = {onClick(TartuScreen.Hotel)}
+            ) {
+                Icon(Icons.Default.Home, contentDescription = stringResource(R.string.hotels))
+            }
+            IconButton(
+                onClick = {onClick(TartuScreen.Restaurant)}
+            ) {
+                Icon(Icons.Default.Face, contentDescription = stringResource(R.string.restaurants))
+            }
+            IconButton(
+                onClick = {onClick(TartuScreen.Park)}
+            ) {
+                Icon(Icons.Default.Favorite, contentDescription = stringResource(R.string.parks))
+            }
+            IconButton(
+                onClick = {onClick(TartuScreen.Mall)}
+            ) {
+                Icon(Icons.Default.ShoppingCart, contentDescription = stringResource(R.string.malls))
+            }
+        }
     }
-    IconButton(onClick = {navController.navigate(TartuScreen.Restaurant.name)}) {
-        Icon(Icons.Default.Face, contentDescription = "Restaurantes")
-    }
-    IconButton(onClick = {navController.navigate(TartuScreen.Park.name)}) {
-        Icon(Icons.Default.Favorite, contentDescription = "Parques")
-    }
-    IconButton(onClick = {navController.navigate(TartuScreen.Mall.name)}) {
-        Icon(Icons.Default.ShoppingCart, contentDescription = "Centros_comerciales")
-    }
+}
+
+@Preview
+@Composable
+fun TopBarPreviewAlt(){
+    val viewModel: TartuViewModel = TartuViewModel()
+    val uiState by viewModel.uiState.collectAsState()
+
+    viewModel.showDetails(true)
+    viewModel.updateCurrentSection(TartuScreen.Details)
+
+    TartuTopBar(uiState)
+}
+
+@Preview
+@Composable
+fun GeneralPreview(){
+    TartuApp()
 }

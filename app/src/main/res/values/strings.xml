@@ -1,9 +1,11 @@
 <resources>
     <string name="app_name">MyTartu</string>
+
     <string name="hotels">Hoteles</string>
     <string name="restaurants">Restaurantes</string>
     <string name="parks">Parques</string>
     <string name="malls">Centros Comerciales</string>
+    <string name="details">Detalles de %s</string>
 
     <!-- Hoteles -->
     <string name="hotel_tartu">Hotel Tartu</string>
@@ -25,4 +27,25 @@
     <string name="hektor_design_hostel_details">Ofrece habitaciones privadas y compartidas, así como áreas comunes para socializar. Es una opción económica y popular entre los viajeros jóvenes y mochileros.</string>
     <string name="hotell_soho_details">Ofrece habitaciones modernas y bien equipadas, así como un restaurante y bar. Es una opción ideal para quienes desean explorar el centro histórico de la ciudad.</string>
     <string name="bob_w_duo_lofts_details">Es una excelente opción para estancias más largas o para quienes buscan más espacio y privacidad. Estos apartamentos suelen estar equipados con cocina y lavandería.</string>
+
+    <!-- Restaurantes -->
+    <string name="restoran_aparaat">Restoran Aparaat</string>
+    <string name="gunpowder_cellar">Gunpowder Cellar of Tartu</string>
+    <string name="restaurant_munchen">Restaurant München - Weihenstephaner Wirtshaus</string>
+    <string name="humal_bistro">Humal BISTRO</string>
+    <string name="la_dolce_vita">La Dolce Vita</string>
+
+    <!-- Descripcion de Restaurantes -->
+    <string name="restoran_aparaat_desc">Un restaurante moderno y elegante en un antiguo complejo industrial.</string>
+    <string name="gunpowder_cellar_desc">Restaurante histórico en un antiguo polvorín, con cocina tradicional estonia.</string>
+    <string name="restaurant_munchen_desc">Auténtica experiencia gastronómica alemana en un ambiente bávaro.</string>
+    <string name="humal_bistro_desc">Bistró moderno con cocina creativa y de temporada.</string>
+    <string name="la_dolce_vita_desc">Auténtica cocina italiana en un ambiente elegante y acogedor.</string>
+
+    <!-- Detalles de Restaurantes -->
+    <string name="restoran_aparaat_details">Ofrece un menú variado de cocina internacional con ingredientes frescos, vinos y cervezas artesanales en un ambiente informal y acogedor.</string>
+    <string name="gunpowder_cellar_details">Especializado en cocina estonia tradicional con platos abundantes y cervezas locales, en un ambiente rústico con paredes de ladrillo y techos abovedados.</string>
+    <string name="restaurant_munchen_details">Sirve platos clásicos alemanes como salchichas y codillo, con una amplia selección de cervezas Weihenstephaner, en un ambiente festivo y animado.</string>
+    <string name="humal_bistro_details">Menú de temporada con ingredientes locales, vinos y cervezas artesanales, en un ambiente informal y relajado.</string>
+    <string name="la_dolce_vita_details">Platos clásicos italianos como pasta y pizza, con vinos italianos, en un ambiente romántico y sofisticado.</string>
 </resources>
