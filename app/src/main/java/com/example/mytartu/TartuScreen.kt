@@ -245,21 +245,3 @@ fun ChooseIconTint(uiState: TartuUiState, currIcon: TartuScreen): Color {
 
 }
 
-//TODO QUITAR ESTO
-@Preview
-@Composable
-fun TopBarPreviewAlt() {
-    val viewModel = TartuViewModel()
-    val uiState by viewModel.uiState.collectAsState()
-
-    viewModel.showDetails(true)
-    viewModel.updateCurrentSection(TartuScreen.Details)
-
-    TartuTopBar(uiState,{})
-}
-
-@Preview
-@Composable
-fun GeneralPreview() {
-    TartuApp()
-}

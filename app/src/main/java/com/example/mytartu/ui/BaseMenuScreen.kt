@@ -27,7 +27,6 @@ import androidx.compose.ui.unit.dp
 import com.example.mytartu.R
 import com.example.mytartu.model.RecomendationItem
 
-//TODO: esto es la apariencia basica de los menus de las apps
 @Composable
 fun BaseMenuScreen(
     viewModel: TartuViewModel,

@@ -20,7 +20,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 
-//TODO: La recomendacion de un sitio en detalle
+
 @Composable
 fun RecomendationScreen(uiState: TartuUiState) {
 
