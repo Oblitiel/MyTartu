@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Face
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
@@ -31,6 +30,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -85,10 +85,12 @@ fun TartuApp(
                 onClick = { screen: TartuScreen ->
                     navController.navigate(screen.name)
                     viewModel.updateCurrentSection(screen)
-                }
+                },
+                uiState = uiState
             )
         },
         modifier = modifier
+
     ) { innerPadding ->
 
 
@@ -99,7 +101,7 @@ fun TartuApp(
         ) {
             // Pantalla Detalles
             composable(route = TartuScreen.Details.name) {
-                RecomendationScreen()
+                RecomendationScreen(uiState)
             }
 
             // Pantalla de hotel
@@ -192,7 +194,8 @@ fun TartuTopBar(
 @Composable
 fun TartuNavigationBar(
     onClick: (TartuScreen) -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    uiState: TartuUiState
 ) {
     NavigationBar (
         modifier = modifier.fillMaxWidth()
@@ -204,28 +207,42 @@ fun TartuNavigationBar(
             IconButton(
                 onClick = { onClick(TartuScreen.Hotel) }
             ) {
-                Icon(Icons.Default.Home, contentDescription = stringResource(R.string.hotels))
+                Icon(Icons.Default.Home, contentDescription = stringResource(R.string.hotels), tint = ChooseIconTint(uiState, TartuScreen.Hotel ))
             }
             IconButton(
                 onClick = { onClick(TartuScreen.Restaurant) }
             ) {
-                Icon(Icons.Default.Face, contentDescription = stringResource(R.string.restaurants))
+                Icon(Icons.Default.Face, contentDescription = stringResource(R.string.restaurants), tint = ChooseIconTint(uiState, TartuScreen.Restaurant ))
             }
             IconButton(
                 onClick = { onClick(TartuScreen.Park) }
             ) {
-                Icon(Icons.Default.Favorite, contentDescription = stringResource(R.string.parks))
+                Icon(Icons.Default.Favorite, contentDescription = stringResource(R.string.parks), tint = ChooseIconTint(uiState, TartuScreen.Park ))
             }
             IconButton(
                 onClick = { onClick(TartuScreen.Mall) }
             ) {
                 Icon(
                     Icons.Default.ShoppingCart,
-                    contentDescription = stringResource(R.string.malls)
+                    contentDescription = stringResource(R.string.malls),
+                    tint = ChooseIconTint(uiState, TartuScreen.Mall )
                 )
             }
         }
     }
+}
+
+fun ChooseIconTint(uiState: TartuUiState, currIcon: TartuScreen): Color {
+    if (uiState.currentSection == TartuScreen.Details){
+        if (uiState.prepSection == currIcon){ return Color(0xFF0072CE) }
+
+        return Color.DarkGray
+    }
+
+    if (uiState.currentSection == currIcon){ return Color(0xFF0072CE) }
+
+    return Color.DarkGray
+
 }
 
 //TODO QUITAR ESTO
