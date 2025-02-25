@@ -6,7 +6,9 @@ package com.example.mytartu
 import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -22,9 +24,11 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationRail
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults.topAppBarColors
+import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -55,6 +59,7 @@ enum class TartuScreen(@StringRes val tittle: Int) {
 
 @Composable
 fun TartuApp(
+    windowSize : WindowWidthSizeClass,
     modifier: Modifier = Modifier
 ) {
 
@@ -91,8 +96,6 @@ fun TartuApp(
         modifier = modifier
 
     ) { innerPadding ->
-
-
         NavHost(
             navController = navController,
             startDestination = currentScreen,
@@ -100,14 +103,18 @@ fun TartuApp(
         ) {
             // Pantalla Detalles
             composable(route = TartuScreen.Details.name) {
-                RecomendationScreen(uiState)
+                RecomendationScreen(
+                    uiState,
+                    windowSize
+                )
             }
 
             // Pantalla de hotel
             composable(route = TartuScreen.Hotel.name) {
                 BaseMenuScreen(
                     options = DataSource.getHotels(),
-                    onItemClick = onItemClick
+                    onItemClick = onItemClick,
+                    windowSize = windowSize
                 )
             }
 
@@ -115,7 +122,8 @@ fun TartuApp(
             composable(route = TartuScreen.Restaurant.name) {
                 BaseMenuScreen(
                     options = DataSource.getRestaurants(),
-                    onItemClick = onItemClick
+                    onItemClick = onItemClick,
+                    windowSize = windowSize
                 )
             }
 
@@ -123,7 +131,8 @@ fun TartuApp(
             composable(route = TartuScreen.Park.name) {
                 BaseMenuScreen(
                     options = DataSource.getParks(),
-                    onItemClick = onItemClick
+                    onItemClick = onItemClick,
+                    windowSize = windowSize
                 )
             }
 
@@ -131,7 +140,8 @@ fun TartuApp(
             composable(route = TartuScreen.Mall.name) {
                 BaseMenuScreen(
                     options = DataSource.getShoppingMalls(),
-                    onItemClick = onItemClick
+                    onItemClick = onItemClick,
+                    windowSize = windowSize
                 )
             }
         }
@@ -155,7 +165,6 @@ fun TartuTopBar(
         title = {
             Row(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 if (uiState.isShowingDetails){
@@ -166,11 +175,6 @@ fun TartuTopBar(
                         )
                     }
                 }
-                Image(
-                    painter = painterResource(R.drawable.tartu_icon),
-                    contentDescription = null,
-                    modifier = Modifier.size(dimensionResource(R.dimen.icon_size))
-                )
                 Text(
                     text = if (uiState.isShowingDetails) {
                         stringResource(
@@ -180,6 +184,14 @@ fun TartuTopBar(
                     } else {
                         stringResource(uiState.currentSection.tittle)
                     }
+                )
+                Spacer(
+                    modifier = Modifier.weight(1F)
+                )
+                Image(
+                    painter = painterResource(R.drawable.tartu_icon),
+                    contentDescription = null,
+                    modifier = Modifier.size(dimensionResource(R.dimen.icon_size))
                 )
             }
         }
@@ -202,32 +214,32 @@ fun TartuNavigationBar(
             IconButton(
                 onClick = { onClick(TartuScreen.Hotel) }
             ) {
-                Icon(Icons.Default.Home, contentDescription = stringResource(R.string.hotels), tint = ChooseIconTint(uiState, TartuScreen.Hotel ))
+                Icon(painterResource(R.drawable.hotel_icon), contentDescription = stringResource(R.string.hotels), tint = chooseIconTint(uiState, TartuScreen.Hotel ))
             }
             IconButton(
                 onClick = { onClick(TartuScreen.Restaurant) }
             ) {
-                Icon(Icons.Default.Face, contentDescription = stringResource(R.string.restaurants), tint = ChooseIconTint(uiState, TartuScreen.Restaurant ))
+                Icon(painterResource(R.drawable.restaurant_icon), contentDescription = stringResource(R.string.restaurants), tint = chooseIconTint(uiState, TartuScreen.Restaurant ))
             }
             IconButton(
                 onClick = { onClick(TartuScreen.Park) }
             ) {
-                Icon(Icons.Default.Favorite, contentDescription = stringResource(R.string.parks), tint = ChooseIconTint(uiState, TartuScreen.Park ))
+                Icon(painterResource(R.drawable.park_icon), contentDescription = stringResource(R.string.parks), tint = chooseIconTint(uiState, TartuScreen.Park ))
             }
             IconButton(
                 onClick = { onClick(TartuScreen.Mall) }
             ) {
                 Icon(
-                    Icons.Default.ShoppingCart,
+                    painterResource(R.drawable.mall_icon),
                     contentDescription = stringResource(R.string.malls),
-                    tint = ChooseIconTint(uiState, TartuScreen.Mall )
+                    tint = chooseIconTint(uiState, TartuScreen.Mall )
                 )
             }
         }
     }
 }
 
-fun ChooseIconTint(uiState: TartuUiState, currIcon: TartuScreen): Color {
+fun chooseIconTint(uiState: TartuUiState, currIcon: TartuScreen): Color {
     if (uiState.currentSection == TartuScreen.Details){
         if (uiState.prepSection == currIcon){ return Color(0xFF0072CE) }
 
