@@ -8,7 +8,7 @@ object DataSource {
 
     val  defaultRecomendationItem = RecomendationItem(
         id = 1,
-        imageResourceId = R.drawable.la_bochi,
+        imageResourceId = R.drawable.hotel_tartu,
         name = R.string.hotel_tartu,
         description = R.string.hotel_tartu_desc,
         details = R.string.hotel_tartu_details

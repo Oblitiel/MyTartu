@@ -74,7 +74,7 @@ fun RecomendationScreen(
                 style = MaterialTheme.typography.bodyLarge
             )
         }
-        if (windowSize != WindowWidthSizeClass.Compact || true){
+        if (windowSize != WindowWidthSizeClass.Compact){
             Image(
                 painterResource(uiState.currentRecomendation.imageResourceId),
                 stringResource( uiState.currentRecomendation.name ),
